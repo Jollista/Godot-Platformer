@@ -4,8 +4,8 @@
 [ext_resource path="res://GodotLogoTileset.tres" type="TileSet" id=2]
 [ext_resource path="res://PlayerController.gd" type="Script" id=3]
 
-[sub_resource type="CapsuleShape2D" id=1]
-height = 0.0
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 10, 9.5 )
 
 [sub_resource type="Animation" id=7]
 resource_name = "Dash"
@@ -116,8 +116,8 @@ hframes = 9
 vframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2( 3, 6 )
-shape = SubResource( 1 )
+position = Vector2( 3, 6.5 )
+shape = SubResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true

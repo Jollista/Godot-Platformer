@@ -10,6 +10,7 @@ const ACCELERATION = 15
 var motion = Vector2()
 var facingRight = true
 var falling = false
+var hasLanded = true
 
 onready var sprite := $Sprite
 onready var anim := $AnimationPlayer
@@ -49,7 +50,7 @@ func _physics_process(delta):
 			anim.play("Idle")
 	# limit to max speed
 	motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
-	print(motion.x)
+	#print(motion.x)
 	
 	# jumping
 	if is_on_floor(): # can only jump if on floor
@@ -67,17 +68,31 @@ func _physics_process(delta):
 	motion = move_and_slide(motion, UP)
 
 func _input(event):
-	if event is InputEventMouseButton and dashDelayTimer.is_stopped(): # on click
+	
+	if is_on_floor():
+		hasLanded = true
+	if event is InputEventMouseButton and dashDelayTimer.is_stopped() and hasLanded: # on click
+		print("Dashing")
+		hasLanded = false
+		
 		# start timer
 		dashDelayTimer.start(dashDelay)
 		
 		var mouse_direction = get_local_mouse_position().normalized()
 		motion = Vector2(MAX_SPEED/2 * mouse_direction.x, MAX_SPEED/2 * mouse_direction.y)
-		print(get_viewport().get_mouse_position())
+		print("Mouse position:\t" + String(get_viewport().get_mouse_position()))
+		print("Global Transform:\t\t\t" + String(sprite.position))
+		
+		# used for animation facing
+		if mouse_direction.x > sprite.position.x: # dashing right
+			facingRight = true
+			sprite.scale.x = 1
+		elif mouse_direction.x < sprite.position.y: # dashing left
+			facingRight = false
+			sprite.scale.x = -1
 		
 		# animate
 		anim.play("Dash")
 		
 		# apply movement
 		move_and_collide(motion)
-
