@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/rhinoceros-by-kevin-macleod-from-filmmusic-io.mp3-62f102435d039be567e01396a03b0d21.mp3str"
+
+[deps]
+
+source_file="res://Sounds/rhinoceros-by-kevin-macleod-from-filmmusic-io.mp3"
+dest_files=[ "res://.import/rhinoceros-by-kevin-macleod-from-filmmusic-io.mp3-62f102435d039be567e01396a03b0d21.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
