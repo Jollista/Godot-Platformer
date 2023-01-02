@@ -22,7 +22,7 @@ func _process(delta):
 	playerPos = player.position
 #	print("Mouse Pos: " + String(mousePos))
 #	print("Player Pos: " + String(playerPos))
-	if Input.is_action_pressed("Sneak"):
+	if Input.is_action_pressed("sneak"):
 		position.x = (mousePos.x + playerPos.x)/2
 		position.y = (mousePos.y + playerPos.y)/2
 	else:

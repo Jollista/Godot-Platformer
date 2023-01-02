@@ -94,7 +94,10 @@ func _physics_process(delta):
 			anim.play("Idle")
 
 	# limit to max speed if not dashing
-	motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
+	if Input.is_action_pressed("sneak"):
+		motion.x = clamp(motion.x, -MAX_SPEED/3, MAX_SPEED/3)
+	else: 
+		motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 	#print(motion.x)
 
 	# jumping
