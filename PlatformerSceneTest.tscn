@@ -113,7 +113,7 @@ length = 0.3
 [node name="World" type="Node2D"]
 
 [node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -196 )
+position = Vector2( 0, -88 )
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Player"]
@@ -140,10 +140,6 @@ one_shot = true
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource( 5 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
-zoom = Vector2( 0.4, 0.4 )
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
@@ -154,3 +150,8 @@ tile_data = PoolIntArray( -65545, 0, 0, -65544, 0, 0, -65543, 0, 0, -65542, 0, 0
 position = Vector2( 0, -196 )
 stream = ExtResource( 4 )
 autoplay = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, -88 )
+current = true
+zoom = Vector2( 0.4, 0.4 )
