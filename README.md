@@ -9,5 +9,7 @@ The following music was used for this media project:
 <br>Music: Rhinoceros by Kevin MacLeod
 <br>Free download: https://filmmusic.io/song/4284-rhinoceros
 <br>License (CC BY 4.0): https://filmmusic.io/standard-license
+<br>Changes made:
+<br>- phaser effect
 
 <!--Music - [Impact Moderato by Kevin MacLeod](https://freemusicarchive.org/music/Kevin_MacLeod/Impact)-->
