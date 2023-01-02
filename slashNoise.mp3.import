@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/slashNoise.mp3-2d7cbd4e534e891a60ca8d3256f22c4a.mp3str"
+
+[deps]
+
+source_file="res://slashNoise.mp3"
+dest_files=[ "res://.import/slashNoise.mp3-2d7cbd4e534e891a60ca8d3256f22c4a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
