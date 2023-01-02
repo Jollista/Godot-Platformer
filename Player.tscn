@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Sounds/slashNoise.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Sprites/viking2.png" type="Texture" id=2]
@@ -87,6 +87,22 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
+[sub_resource type="Animation" id=9]
+resource_name = "Roll"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 29, 30, 31, 32 ]
+}
+
 [sub_resource type="Animation" id=7]
 resource_name = "Run"
 length = 0.6
@@ -126,10 +142,14 @@ anims/Fall = SubResource( 3 )
 anims/Idle = SubResource( 4 )
 anims/Jump = SubResource( 5 )
 anims/RESET = SubResource( 6 )
+anims/Roll = SubResource( 9 )
 anims/Run = SubResource( 7 )
 anims/Slash = SubResource( 8 )
 
 [node name="DashDelayTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RollDelayTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

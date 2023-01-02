@@ -7,8 +7,7 @@ const MAX_FALL_SPEED = 200
 const MAX_SPEED = 200
 const JUMP_FORCE = 400
 const ACCELERATION = 15
-const DASH_SPEED = 400
-const DASH_LENGTH = 0.1
+const ROLL_SPEED = 150
 
 # variables for motion and animation
 var motion = Vector2()
@@ -23,8 +22,10 @@ var played = false
 onready var sprite := $Sprite
 onready var anim := $AnimationPlayer
 onready var dashDelayTimer := $DashDelayTimer
+onready var rollDelayTimer := $RollDelayTimer
 
 export var dashDelay: float = 0.5
+export var rollDelay: float = 0.5
 
 func _input(event):
 	# determine hasLanded
@@ -78,25 +79,33 @@ func _physics_process(delta):
 		sprite.scale.x = -1
 
 	# horizontal movement
-	if Input.is_action_pressed("right"):
+	if Input.is_action_pressed("right") and rollDelayTimer.is_stopped():
 		motion.x += ACCELERATION
 		facingRight = true
 		if is_on_floor() && anim.current_animation != "Dash":
 			anim.play("Run")
-	elif Input.is_action_pressed("left"):
+	elif Input.is_action_pressed("left") and rollDelayTimer.is_stopped():
 		motion.x -= ACCELERATION
 		facingRight = false
 		if is_on_floor() && anim.current_animation != "Dash":
 			anim.play("Run")
-	else: # slow down if not running
+	elif rollDelayTimer.is_stopped(): # slow down if not running
 		motion.x = lerp(motion.x, 0, 0.2)
 		if is_on_floor() && anim.current_animation != "Dash":
 			anim.play("Idle")
 
-	# limit to max speed if not dashing
+	# limit speed if sneaking
 	if Input.is_action_pressed("sneak"):
 		motion.x = clamp(motion.x, -MAX_SPEED/3, MAX_SPEED/3)
-	else: 
+	# handle rolling
+	elif Input.is_action_pressed("roll") and rollDelayTimer.is_stopped() and is_on_floor():
+		rollDelayTimer.start(rollDelay)
+		if facingRight:
+			motion.x = ROLL_SPEED
+		else:
+			motion.x = -ROLL_SPEED
+		anim.play("Roll")
+	elif rollDelayTimer.is_stopped(): # limit speed if not rolling
 		motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 	#print(motion.x)
 
