@@ -14,6 +14,10 @@ config/name="Godot Projects"
 run/main_scene="res://PlatformerSceneTest.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+mouse_cursor/custom_image="res://crosshair2.png"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
