@@ -24,6 +24,7 @@ onready var sprite := $Sprite
 onready var anim := $AnimationPlayer
 onready var dashDelayTimer := $DashDelayTimer
 onready var rollDelayTimer := $RollDelayTimer
+onready var sfx := $PlayerSFX
 
 export var dashDelay: float = 0.5
 export var rollDelay: float = 0.3
@@ -36,14 +37,13 @@ func _input(event):
 	# handle dash + associated animation
 	if event is InputEventMouseButton and dashDelayTimer.is_stopped() and hasLanded: # on click
 		# hasn't landed since dashing yet
-		print("Dashing")
 		hasLanded = false
 
 		# start timer
 		dashDelayTimer.start(dashDelay)
 
 		# play sound effect
-		$AudioStreamPlayer2D.play()
+		sfx.play()
 
 		# get local mouse direction, calculate motion
 		var mouse_direction = get_local_mouse_position().normalized()
