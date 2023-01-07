@@ -7,7 +7,8 @@ const MAX_FALL_SPEED = 200
 const MAX_SPEED = 200
 const JUMP_FORCE = 400
 const ACCELERATION = 15
-const ROLL_SPEED = 150
+const ROLL_SPEED = 200
+const DASH_SPEED = 250
 
 # variables for motion and animation
 var motion = Vector2()
@@ -25,7 +26,7 @@ onready var dashDelayTimer := $DashDelayTimer
 onready var rollDelayTimer := $RollDelayTimer
 
 export var dashDelay: float = 0.5
-export var rollDelay: float = 0.5
+export var rollDelay: float = 0.3
 
 func _input(event):
 	# determine hasLanded
@@ -46,7 +47,7 @@ func _input(event):
 
 		# get local mouse direction, calculate motion
 		var mouse_direction = get_local_mouse_position().normalized()
-		motion = Vector2(mouse_direction.x, mouse_direction.y) * MAX_SPEED/2
+		motion = Vector2(mouse_direction.x, mouse_direction.y) * DASH_SPEED
 		print("Mouse position:\t" + String(get_viewport().get_mouse_position()))
 		print("Global Transform:\t\t\t" + String(sprite.position))
 
@@ -64,9 +65,15 @@ func _input(event):
 		anim.play("Dash")
 
 		# apply movement
-		move_and_collide(motion)
+		#move_and_collide(motion)
 
 func _physics_process(delta):
+	# if dashing
+	if anim.current_animation == "Dash":
+		# apply movement
+		motion = move_and_slide(motion, UP)
+		return
+	
 	# falling physics
 	motion.y += GRAVITY
 	if motion.y > MAX_FALL_SPEED:
