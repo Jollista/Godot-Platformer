@@ -24,7 +24,6 @@ onready var sprite := $Sprite
 onready var anim := $AnimationPlayer
 onready var dashDelayTimer := $DashDelayTimer
 onready var rollDelayTimer := $RollDelayTimer
-onready var sfx := $PlayerSFX
 
 export var dashDelay: float = 0.5
 export var rollDelay: float = 0.3
@@ -43,7 +42,7 @@ func _input(event):
 		dashDelayTimer.start(dashDelay)
 
 		# play sound effect
-		sfx.play()
+		$DashSFX.play()
 
 		# get local mouse direction, calculate motion
 		var mouse_direction = get_local_mouse_position().normalized()
@@ -106,6 +105,7 @@ func _physics_process(delta):
 		motion.x = clamp(motion.x, -MAX_SPEED/3, MAX_SPEED/3)
 	# handle rolling
 	elif Input.is_action_pressed("roll") and rollDelayTimer.is_stopped() and is_on_floor():
+		$RollSFX.play()
 		rollDelayTimer.start(rollDelay)
 		if facingRight:
 			motion.x = ROLL_SPEED
