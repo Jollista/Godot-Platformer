@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Sounds/slashNoise.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Sprites/viking2.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=3]
 [ext_resource path="res://Sounds/rollNoise.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Sounds/walkNoise.mp3" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/jumpNoise.mp3" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 9.5 )
@@ -131,6 +133,12 @@ audio_stream = ExtResource( 1 )
 [sub_resource type="AudioStreamRandomPitch" id=11]
 audio_stream = ExtResource( 4 )
 
+[sub_resource type="AudioStreamRandomPitch" id=12]
+audio_stream = ExtResource( 6 )
+
+[sub_resource type="AudioStreamRandomPitch" id=13]
+audio_stream = ExtResource( 5 )
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 3 )
 
@@ -165,4 +173,12 @@ bus = "Player SFX"
 
 [node name="RollSFX" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 11 )
+bus = "Player SFX"
+
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 12 )
+bus = "Player SFX"
+
+[node name="RunSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 13 )
 bus = "Player SFX"

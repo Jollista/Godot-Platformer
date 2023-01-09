@@ -69,7 +69,7 @@ func _input(event):
 func _physics_process(delta):
 	# if dashing
 	if anim.current_animation == "Dash":
-		# apply movement
+		# apply movement and stop
 		motion = move_and_slide(motion, UP)
 		return
 	
@@ -85,24 +85,32 @@ func _physics_process(delta):
 		sprite.scale.x = -1
 
 	# horizontal movement
-	if Input.is_action_pressed("right") and rollDelayTimer.is_stopped():
+	if Input.is_action_pressed("right") and rollDelayTimer.is_stopped(): # input right and not rolling
+		# Accelerate and update facingRight
 		motion.x += ACCELERATION
 		facingRight = true
-		if is_on_floor() && anim.current_animation != "Dash":
+		if is_on_floor(): # animate and play sfx
 			anim.play("Run")
-	elif Input.is_action_pressed("left") and rollDelayTimer.is_stopped():
+			if not $RunSFX.playing: 
+				$RunSFX.play()
+	elif Input.is_action_pressed("left") and rollDelayTimer.is_stopped(): # input left and not rolling
+		# Decelerate and update facingRight
 		motion.x -= ACCELERATION
 		facingRight = false
-		if is_on_floor() && anim.current_animation != "Dash":
+		if is_on_floor(): # animate and play sfx
 			anim.play("Run")
-	elif rollDelayTimer.is_stopped(): # slow down if not running
+			if not $RunSFX.playing: 
+				$RunSFX.play()
+	
+	elif rollDelayTimer.is_stopped(): # slow down if not running and not rolling
 		motion.x = lerp(motion.x, 0, 0.2)
-		if is_on_floor() && anim.current_animation != "Dash":
+		if is_on_floor():
 			anim.play("Idle")
-
+	
 	# limit speed if sneaking
 	if Input.is_action_pressed("sneak"):
 		motion.x = clamp(motion.x, -MAX_SPEED/3, MAX_SPEED/3)
+	
 	# handle rolling
 	elif Input.is_action_pressed("roll") and rollDelayTimer.is_stopped() and is_on_floor():
 		$RollSFX.play()
@@ -114,17 +122,17 @@ func _physics_process(delta):
 		anim.play("Roll")
 	elif rollDelayTimer.is_stopped(): # limit speed if not rolling
 		motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
-	#print(motion.x)
-
+	
 	# jumping
 	if is_on_floor(): # can only jump if on floor
 		falling = false
-		if Input.is_action_pressed("jump") && anim.current_animation != "Dash":
+		if Input.is_action_pressed("jump"): # jump and play sfx
 			motion.y = -JUMP_FORCE
-	else: # is in air
-		if motion.y < 0 && anim.current_animation != "Dash":
+			$JumpSFX.play()
+	else: # is in air, animate
+		if motion.y < 0:
 			anim.play("Jump")
-		elif (motion.y > 0 && !falling) && anim.current_animation != "Dash":
+		elif (motion.y > 0 && !falling):
 			anim.play("Fall")
 			falling = true
 
