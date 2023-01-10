@@ -15,6 +15,7 @@ var motion = Vector2()
 var facingRight = true
 var falling = false
 var hasLanded = true
+var canMove = true
 
 # variables for audio handling
 var played = false
@@ -67,6 +68,10 @@ func _input(event):
 		#move_and_collide(motion)
 
 func _physics_process(delta):
+	# lock all movement if canMove == false
+	if !canMove:
+		return
+	
 	# if dashing
 	if anim.current_animation == "Dash":
 		# apply movement and stop
@@ -138,3 +143,9 @@ func _physics_process(delta):
 
 	# apply movement
 	motion = move_and_slide(motion, UP)
+
+func freeze(playIdle:bool = true):
+	anim.play("idle")
+	canMove = false
+func unfreeze():
+	canMove = true
