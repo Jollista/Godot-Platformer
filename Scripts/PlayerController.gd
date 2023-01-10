@@ -145,7 +145,7 @@ func _physics_process(delta):
 	motion = move_and_slide(motion, UP)
 
 func freeze(playIdle:bool = true):
-	anim.play("idle")
+	anim.play("Idle")
 	canMove = false
 func unfreeze():
 	canMove = true
