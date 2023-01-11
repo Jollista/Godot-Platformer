@@ -9,12 +9,12 @@
 
 [node name="World" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -3, -94 )
-
 [node name="NPC" parent="." instance=ExtResource( 3 )]
 position = Vector2( -120, -16 )
 dialogPath = "res://DialogueJSONs/dialogExample.json"
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( -3, -94 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
