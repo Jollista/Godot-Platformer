@@ -7,7 +7,7 @@ A platforming game made in the Godot game engine
 
 Basic player movement tutorial I referenced by [Eli Cuaycong](https://www.youtube.com/watch?v=xFEKIWpd0sU)
 
-Dialogue tutorial I referenced by [DevWorm](https://www.youtube.com/watch?v=7CCofjq_dHM)
+Dialogue tutorial I referenced by [DevWorm](https://www.youtube.com/watch?v=7CCofjq_dHM) and another by [Afely](https://www.youtube.com/watch?v=GzPvN5wsp7Y&t=311s)
 
 ### Visual Art
 Eli Cuaycong also made the also made the [viking sprite](https://hajileee.itch.io/hajileees-fantasy-characters-pack)
