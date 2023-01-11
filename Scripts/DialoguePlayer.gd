@@ -14,8 +14,11 @@ var dialogue = []
 var currentDialogue = 0
 # is dialogue active
 var active = false
+# is current line finished displaying
+var finished = true
 
 func _ready():
+	$Indicator/AnimationPlayer.play("Bob")
 	visible = false
 
 func startDialogue(filepath:String = ""):
@@ -35,24 +38,35 @@ func startDialogue(filepath:String = ""):
 	visible = true
 	active = true
 	
+	# set wait time between displaying characters
+	$DialogueDelay.set_wait_time(0.01)
+	
 	# freeze player in place
 	$"../Player".freeze()
 	
 	# update text
 	nextLine()
 
+# load and parse dialogue from JSON file
 func loadDialogue():
 	var file = File.new()
 	if file.file_exists(dialogueFile):
 		file.open(dialogueFile, file.READ)
 		return parse_json(file.get_as_text())
 
-# progress dialogue
-func _input(event):
-	if active and (Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("ui_accept")):
+# handles dialogue progression
+func _process(delta):
+	$Indicator.visible = finished
+	if active and (Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("interact")):
+		if finished: # go to next line
 			nextLine()
+		else: # skip dialog animation
+			$DialogueBox/Chat.visible_characters = len($DialogueBox/Chat.text)
 
 func nextLine():
+	# update vars
+	finished = false
+	
 	# if index is out of bounds, end dialogue
 	if currentDialogue >= len(dialogue):
 		endDialogue()
@@ -61,14 +75,28 @@ func nextLine():
 	# update text
 	$DialogueBox/Name.text = dialogue[currentDialogue]["Name"]
 	$DialogueBox/Chat.text = dialogue[currentDialogue]["Text"]
+	print("Updating text, currentDialogue: " + String(currentDialogue))
 	
 	# increment index
 	currentDialogue += 1
+	
+	# clear textbox
+	$DialogueBox/Chat.visible_characters = 0
+	# write phrase
+	while $DialogueBox/Chat.visible_characters < len($DialogueBox/Chat.text):
+		$DialogueBox/Chat.visible_characters += 1 # make next char visible
+		# delay between characters made visible
+		$DialogueDelay.start()
+		yield($DialogueDelay, "timeout") # delay while loop until timeout
+	finished = true
+	return
 
 func endDialogue():
 	# reset variables
 	visible = false
 	active = false
+	currentDialogue = 0
+	print("Ending dialogue, currentDialogue: " + String(currentDialogue))
 	
 	# unfreeze player
 	$"../Player".unfreeze()

@@ -1,7 +1,39 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Sprites/dialogboxsprite.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/DialoguePlayer.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Bob"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 944, 568 ), Vector2( 944, 560 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 944, 568 ) ]
+}
 
 [node name="DialogueCanvas" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -36,3 +68,12 @@ text = "Dialogue goes here"
 
 [node name="DialogueDelay" type="Timer" parent="."]
 one_shot = true
+
+[node name="Indicator" type="Polygon2D" parent="."]
+position = Vector2( 944, 568 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -8, 0, 8, 0, 0, 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Indicator"]
+anims/Bob = SubResource( 1 )
+anims/RESET = SubResource( 2 )
