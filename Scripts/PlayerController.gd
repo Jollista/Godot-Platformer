@@ -30,6 +30,10 @@ export var dashDelay: float = 0.5
 export var rollDelay: float = 0.3
 
 func _input(event):
+	# do nothing if can't move
+	if !canMove:
+		return
+	
 	# determine hasLanded
 	if is_on_floor():
 		hasLanded = true

@@ -1,85 +1,38 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Sprites/viking2.png" type="Texture" id=1]
-[ext_resource path="res://BasicDialog.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/dialogboxsprite.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/DialoguePlayer.gd" type="Script" id=2]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Indicate"
-length = 0.8
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 880, 128 ), Vector2( 880, 136 ) ]
-}
+[node name="DialogueCanvas" type="CanvasLayer"]
+script = ExtResource( 2 )
 
-[sub_resource type="Animation" id=2]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 880, 136 ) ]
-}
-
-[node name="Control" type="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="Portrait" type="Sprite" parent="."]
-position = Vector2( 68, 329.713 )
-scale = Vector2( 16.75, 16.8337 )
-texture = ExtResource( 1 )
-hframes = 9
-vframes = 6
-
-[node name="Dialog Box" type="ColorRect" parent="."]
+[node name="DialogueBox" type="NinePatchRect" parent="."]
 margin_left = 64.0
 margin_top = 448.0
 margin_right = 960.0
-margin_bottom = 592.0
-color = Color( 0.960784, 0.831373, 0.556863, 1 )
-script = ExtResource( 2 )
-dialogPath = "C:\\Users\\June\\Desktop\\Godot Projects\\Test\\dialogExample.json"
+margin_bottom = 584.0
+texture = ExtResource( 1 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
 
-[node name="Name" type="RichTextLabel" parent="Dialog Box"]
+[node name="Name" type="RichTextLabel" parent="DialogueBox"]
+anchor_right = 0.009
 margin_left = 16.0
 margin_top = 8.0
-margin_right = 880.0
+margin_right = 871.936
 margin_bottom = 32.0
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-tab_size = 5
 text = "Name"
 
-[node name="Text" type="RichTextLabel" parent="Dialog Box"]
-modulate = Color( 0, 0, 0, 1 )
+[node name="Chat" type="RichTextLabel" parent="DialogueBox"]
 margin_left = 16.0
-margin_top = 40.0
+margin_top = 32.0
 margin_right = 880.0
 margin_bottom = 128.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
 text = "Dialogue goes here"
 
-[node name="Timer" type="Timer" parent="Dialog Box"]
+[node name="DialogueDelay" type="Timer" parent="."]
 one_shot = true
-
-[node name="Indicator" type="Polygon2D" parent="Dialog Box"]
-position = Vector2( 880, 136 )
-color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 12, -2, -4, -2, 4, 6 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Dialog Box/Indicator"]
-anims/Indicate = SubResource( 1 )
-anims/RESET = SubResource( 2 )

@@ -1,14 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://NPC.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sounds/rhinoceros-by-kevin-macleod-from-filmmusic-io.mp3" type="AudioStream" id=4]
+[ext_resource path="res://BasicDialog.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/CameraController.gd" type="Script" id=6]
 
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -3, -94 )
+
+[node name="NPC" parent="." instance=ExtResource( 3 )]
+position = Vector2( -120, -16 )
+dialogPath = "res://DialogueJSONs/dialogExample.json"
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -27,3 +33,5 @@ position = Vector2( 0, -108 )
 stream = ExtResource( 4 )
 autoplay = true
 bus = "Music"
+
+[node name="DialogueCanvas" parent="." instance=ExtResource( 5 )]

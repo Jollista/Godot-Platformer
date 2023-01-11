@@ -1,23 +1,34 @@
 extends ColorRect
 
-export var dialogPath = ""
 export(float) var textSpeed = 0.05
 
+var dialogPath = ""
 var dialog
 
 var phraseNum = 0
 var finished = false
 
-func _ready():
+# set dialog
+func setDialog(filepath):
+	dialogPath = filepath
+
+# sets dialog to 
+func startDialog(filepath:String = ""):
+	# set dialog to filepath if not empty
+	if filepath != "":
+		setDialog(filepath)
+	# freeze player movement
+	$"../../../Player".freeze()
 	$Indicator/AnimationPlayer.play("Indicate")
 	$Timer.set_wait_time(textSpeed)
 	dialog = getDialog()
-	assert(dialog, "Dialog not found")
+	#assert(dialog, "Dialog not found")
+	$"../".visible = true
 	nextPhrase()
 
 func _process(delta):
 	$Indicator.visible = finished
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("interact"):
 		if finished: # go to next phrase
 			nextPhrase()
 		else: # skip dialog animation
@@ -26,6 +37,7 @@ func _process(delta):
 # get dialog from .json
 func getDialog() -> Array:
 	var f = File.new()
+	print("dialogPath:" + dialogPath)
 	assert(f.file_exists(dialogPath), "File path does not exist")
 	
 	f.open(dialogPath, File.READ)
@@ -41,6 +53,7 @@ func getDialog() -> Array:
 func nextPhrase() -> void:
 	if phraseNum >= len(dialog):
 		queue_free()
+		$"../".visible = false
 		return
 	
 	finished = false
