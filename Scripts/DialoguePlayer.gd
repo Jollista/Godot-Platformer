@@ -32,7 +32,6 @@ func startDialogue(filepath:String = ""):
 	# if given filepath, load that instead of default
 	if filepath != "" and filepath != null:
 		dialogueFile = filepath
-	print("dialogueFile:" + dialogueFile)
 	
 	# load dialogue
 	dialogue = loadDialogue()
@@ -40,7 +39,7 @@ func startDialogue(filepath:String = ""):
 	# set wait time between displaying characters
 	$DialogueDelay.set_wait_time(NORM)
 	# initial yield before it matters bc that one messes with 
-	#$DialogueBox/Chat.visible_characters for some reason
+	# $DialogueBox/Chat.visible_characters for some reason
 	$DialogueDelay.start()
 	yield($DialogueDelay, "timeout")
 	
@@ -83,7 +82,16 @@ func nextLine():
 	# update text, works with bbcode
 	$DialogueBox/Name.bbcode_text = dialogue[currentDialogue]["Name"]
 	$DialogueBox/Chat.bbcode_text = dialogue[currentDialogue]["Text"]
-	print("Updating text, currentDialogue: " + String(currentDialogue))
+	
+	# handle sprites
+	var f = File.new()
+	#res://Sprites/[character_name]/[emotion].png
+	var img = "res://Sprites/" + dialogue[currentDialogue]["Name"] + "/" + dialogue[currentDialogue]["Emotion"] + ".png"
+	print(img)
+	if f.file_exists(img):
+		$Sprite.texture = load(img)
+	else: 
+		$Sprite.texture = null
 	
 	# increment index
 	currentDialogue += 1
@@ -92,14 +100,6 @@ func nextLine():
 	$DialogueBox/Chat.visible_characters = 0
 	
 	# write phrase
-	print("Text: " + $DialogueBox/Chat.text)
-	var j = 0
-	for i in $DialogueBox/Chat.text:
-		print("char[" + String(j) + "]: " + i)
-		j += 1
-	print("Length: " + String(len($DialogueBox/Chat.text)))
-	print("visible_characters: " + String($DialogueBox/Chat.visible_characters))
-	print(String($DialogueBox/Chat.visible_characters < len($DialogueBox/Chat.text)))
 	while $DialogueBox/Chat.visible_characters < len($DialogueBox/Chat.text):
 		$DialogueBox/Chat.visible_characters += 1 # make next char visible
 		
@@ -122,7 +122,6 @@ func endDialogue():
 	visible = false
 	active = false
 	currentDialogue = 0
-	print("Ending dialogue, currentDialogue: " + String(currentDialogue))
 	
 	# unfreeze player
 	$"../Player".unfreeze()

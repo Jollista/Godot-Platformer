@@ -1,4 +1,4 @@
 [
-	{"Name":"Ms. Dialogue","Text":"Hello~\nmy name is Ms. Dialogue~"},
-	{"Name":"Ms. Dialogue","Text":"It's nice to meet you!"},
+	{"Name":"Ms. Dialogue","Emotion":"Normal","Text":"Hello~\nmy name is Ms. Dialogue~"},
+	{"Name":"Ms. Dialogue","Emotion":"Happy","Text":"It's nice to meet you!"},
 ]
