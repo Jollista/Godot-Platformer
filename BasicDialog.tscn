@@ -56,7 +56,8 @@ margin_top = 8.0
 margin_right = 871.936
 margin_bottom = 32.0
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-text = "Name"
+bbcode_enabled = true
+bbcode_text = "Name"
 
 [node name="Chat" type="RichTextLabel" parent="DialogueBox"]
 margin_left = 16.0
@@ -64,7 +65,8 @@ margin_top = 32.0
 margin_right = 880.0
 margin_bottom = 128.0
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-text = "Dialogue goes here"
+bbcode_enabled = true
+bbcode_text = "Chat"
 
 [node name="DialogueDelay" type="Timer" parent="."]
 one_shot = true

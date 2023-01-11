@@ -7,6 +7,10 @@ export(String, FILE, "*.json") var dialogueFile
 
 # delay between ending one dialogue and starting a new one
 const DIALOGUE_DELAY = 0.1
+# text speeds
+const FAST = 0.01
+const NORM = 0.025
+const SLOW = 0.05
 
 # array of lines
 var dialogue = []
@@ -33,13 +37,17 @@ func startDialogue(filepath:String = ""):
 	# load dialogue
 	dialogue = loadDialogue()
 	
+	# set wait time between displaying characters
+	$DialogueDelay.set_wait_time(NORM)
+	# initial yield before it matters bc that one messes with 
+	#$DialogueBox/Chat.visible_characters for some reason
+	$DialogueDelay.start()
+	yield($DialogueDelay, "timeout")
+	
 	# reset index and set visible/active true
 	currentDialogue = 0
 	visible = true
 	active = true
-	
-	# set wait time between displaying characters
-	$DialogueDelay.set_wait_time(0.01)
 	
 	# freeze player in place
 	$"../Player".freeze()
@@ -72,9 +80,9 @@ func nextLine():
 		endDialogue()
 		return
 	
-	# update text
-	$DialogueBox/Name.text = dialogue[currentDialogue]["Name"]
-	$DialogueBox/Chat.text = dialogue[currentDialogue]["Text"]
+	# update text, works with bbcode
+	$DialogueBox/Name.bbcode_text = dialogue[currentDialogue]["Name"]
+	$DialogueBox/Chat.bbcode_text = dialogue[currentDialogue]["Text"]
 	print("Updating text, currentDialogue: " + String(currentDialogue))
 	
 	# increment index
@@ -82,13 +90,31 @@ func nextLine():
 	
 	# clear textbox
 	$DialogueBox/Chat.visible_characters = 0
+	
 	# write phrase
+	print("Text: " + $DialogueBox/Chat.text)
+	var j = 0
+	for i in $DialogueBox/Chat.text:
+		print("char[" + String(j) + "]: " + i)
+		j += 1
+	print("Length: " + String(len($DialogueBox/Chat.text)))
+	print("visible_characters: " + String($DialogueBox/Chat.visible_characters))
+	print(String($DialogueBox/Chat.visible_characters < len($DialogueBox/Chat.text)))
 	while $DialogueBox/Chat.visible_characters < len($DialogueBox/Chat.text):
 		$DialogueBox/Chat.visible_characters += 1 # make next char visible
+		
 		# delay between characters made visible
 		$DialogueDelay.start()
+		
+		# I don't know why, but during yield's call, visible_characters is set to max
+		# for the first line in a dialogue. I don't understand why this is.
+		# It's just for the first line. The rest work perfect. It's dumb.
+		# I figured out that this only happens with the first time yield is called,
+		# so I got around it by starting a timer and yielding before anything is visible
+		# in startDialogue(), that way it looks fine and if it looks right, it's right, right?
 		yield($DialogueDelay, "timeout") # delay while loop until timeout
 	finished = true
+	
 	return
 
 func endDialogue():
