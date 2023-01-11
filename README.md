@@ -3,7 +3,10 @@ A platforming game made in the Godot game engine
 
 [gitignore template](https://github.com/github/gitignore/blob/main/Godot.gitignore)
 
-[viking sprite](https://hajileee.itch.io/hajileees-fantasy-characters-pack)
+Basic player movement tutorial I referenced by [Eli Cuaycong](https://www.youtube.com/watch?v=xFEKIWpd0sU)
+who also made the [viking sprite](https://hajileee.itch.io/hajileees-fantasy-characters-pack)
+
+Dialogue tutorial I referenced by [DevWorm](https://www.youtube.com/watch?v=7CCofjq_dHM)
 
 The following music was used for this media project:
 <br>Music: Rhinoceros by Kevin MacLeod
