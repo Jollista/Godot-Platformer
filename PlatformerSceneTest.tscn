@@ -4,14 +4,14 @@
 [ext_resource path="res://Sprites/Tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://NPC.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sounds/rhinoceros-by-kevin-macleod-from-filmmusic-io.mp3" type="AudioStream" id=4]
-[ext_resource path="res://BasicDialog.tscn" type="PackedScene" id=5]
+[ext_resource path="res://BasicDialogue.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/CameraController.gd" type="Script" id=6]
 
 [node name="World" type="Node2D"]
 
 [node name="NPC" parent="." instance=ExtResource( 3 )]
 position = Vector2( -120, -16 )
-dialogPath = "res://DialogueJSONs/dialogExample.json"
+dialogPath = "res://DialogueJSONs/dialogueExample.json"
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -3, -94 )
@@ -26,6 +26,10 @@ tile_data = PoolIntArray( -851992, 6, 0, -851991, 6, 0, -851990, 6, 0, -851989, 
 position = Vector2( 0, -88 )
 current = true
 zoom = Vector2( 0.4, 0.4 )
+limit_left = -384
+limit_top = -224
+limit_right = 400
+limit_bottom = 64
 script = ExtResource( 6 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Camera2D"]
