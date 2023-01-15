@@ -69,8 +69,9 @@ func _process(delta):
 	if active and (Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("interact")):
 		if finished: # go to next line
 			nextLine()
-		else: # skip dialog animation
+		else: # skip dialog animation and stop sounds
 			$DialogueBox/Chat.visible_characters = len($DialogueBox/Chat.text)
+			$AudioStreamPlayer.stop()
 
 func nextLine():
 	# update vars
