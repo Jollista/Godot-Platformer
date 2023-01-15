@@ -52,8 +52,7 @@ func _input(event):
 		# get local mouse direction, calculate motion
 		var mouse_direction = get_local_mouse_position().normalized()
 		motion = Vector2(mouse_direction.x, mouse_direction.y) * DASH_SPEED
-		print("Mouse position:\t" + String(get_viewport().get_mouse_position()))
-		print("Global Transform:\t\t\t" + String(sprite.position))
+		print("Mouse position:\t" + String(get_global_mouse_position()))
 
 		var t = get_physics_process_delta_time()
 
