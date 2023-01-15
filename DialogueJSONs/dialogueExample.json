@@ -1,0 +1,4 @@
+[
+	{"Name":"Ms. Dialogue","Emotion":"Normal","Text":"[shake rate=10 level=5]Hello![/shake]\nmy name is [wave amp=25 freq=3]Ms. Dialogue~[/wave]","Sound":"hello"},
+	{"Name":"Ms. Dialogue","Emotion":"Happy","Text":"[wave amp=25 freq=3]It's nice to meet you![/wave]"},
+]
