@@ -20,6 +20,8 @@ var currentDialogue = 0
 var active = false
 # is current line finished displaying
 var finished = true
+# used for handling sprites/sounds
+var f = File.new()
 
 func _ready():
 	$Indicator/AnimationPlayer.play("Bob")
@@ -84,18 +86,19 @@ func nextLine():
 	$DialogueBox/Chat.bbcode_text = dialogue[currentDialogue]["Text"]
 	
 	# handle sprites
-	var f = File.new()
-	#res://Sprites/[character_name]/[emotion].png
-	var img = "res://Sprites/" + dialogue[currentDialogue]["Name"] + "/" + dialogue[currentDialogue]["Emotion"] + ".png"
-	if f.file_exists(img):
-		$Sprite.texture = load(img)
-	else: 
-		$Sprite.texture = null
+	if dialogue[currentDialogue].has("Emotion"): # if JSON defines any sprites for this line
+		#res://Sprites/[character_name]/[emotion].png
+		var img = "res://Sprites/" + dialogue[currentDialogue]["Name"] + "/" + dialogue[currentDialogue]["Emotion"] + ".png"
+		if f.file_exists(img):
+			$Sprite.texture = load(img)
+		else: 
+			$Sprite.texture = null
 	
 	# handle audio
-	# check for basic sound effect (res://Sounds/bang2.wav)
-	if dialogue[currentDialogue].has("Sound"):
+	if dialogue[currentDialogue].has("Sound"): # if JSON defines any sounds for this line
+		# check for basic sound effect (ex: res://Sounds/bang2.wav)
 		var sound = "res://Sounds/" + dialogue[currentDialogue]["Sound"] + ".wav"
+		# check for character specific sound effect (ex: res://Sounds/Ms. Dialogue/hello.wav)
 		var voice = "res://Sounds/" + dialogue[currentDialogue]["Name"] + "/" + dialogue[currentDialogue]["Sound"] + ".wav"
 		if f.file_exists(sound):
 			$AudioStreamPlayer.set_stream(load(sound))
