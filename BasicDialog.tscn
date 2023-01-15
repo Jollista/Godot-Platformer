@@ -64,6 +64,7 @@ margin_bottom = 32.0
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
 bbcode_text = "Name"
+text = "Name"
 
 [node name="Chat" type="RichTextLabel" parent="DialogueBox"]
 margin_left = 16.0
@@ -73,6 +74,7 @@ margin_bottom = 128.0
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
 bbcode_text = "Chat"
+text = "Chat"
 
 [node name="DialogueDelay" type="Timer" parent="."]
 one_shot = true
@@ -85,3 +87,5 @@ polygon = PoolVector2Array( -8, 0, 8, 0, 0, 8 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Indicator"]
 anims/Bob = SubResource( 1 )
 anims/RESET = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

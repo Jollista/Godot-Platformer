@@ -37,7 +37,7 @@ func startDialogue(filepath:String = ""):
 	dialogue = loadDialogue()
 	
 	# set wait time between displaying characters
-	$DialogueDelay.set_wait_time(NORM)
+	$DialogueDelay.set_wait_time(FAST)
 	# initial yield before it matters bc that one messes with 
 	# $DialogueBox/Chat.visible_characters for some reason
 	$DialogueDelay.start()
@@ -87,11 +87,23 @@ func nextLine():
 	var f = File.new()
 	#res://Sprites/[character_name]/[emotion].png
 	var img = "res://Sprites/" + dialogue[currentDialogue]["Name"] + "/" + dialogue[currentDialogue]["Emotion"] + ".png"
-	print(img)
 	if f.file_exists(img):
 		$Sprite.texture = load(img)
 	else: 
 		$Sprite.texture = null
+	
+	# handle audio
+	# check for basic sound effect (res://Sounds/bang2.wav)
+	if dialogue[currentDialogue].has("Sound"):
+		var sound = "res://Sounds/" + dialogue[currentDialogue]["Sound"] + ".wav"
+		var voice = "res://Sounds/" + dialogue[currentDialogue]["Name"] + "/" + dialogue[currentDialogue]["Sound"] + ".wav"
+		if f.file_exists(sound):
+			$AudioStreamPlayer.set_stream(load(sound))
+		elif f.file_exists(voice):
+			$AudioStreamPlayer.set_stream(load(voice))
+		else:
+			$AudioStreamPlayer.set_stream(null)
+		$AudioStreamPlayer.play()
 	
 	# increment index
 	currentDialogue += 1
