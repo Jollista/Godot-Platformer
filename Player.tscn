@@ -156,3 +156,4 @@ one_shot = true
 one_shot = true
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
+bus = "Player SFX"
