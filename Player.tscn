@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Sounds/slashNoise.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Sprites/viking2.png" type="Texture" id=2]
@@ -123,18 +123,6 @@ tracks/0/keys = {
 resource_name = "Slash"
 length = 0.3
 
-[sub_resource type="AudioStreamRandomPitch" id=10]
-audio_stream = ExtResource( 1 )
-
-[sub_resource type="AudioStreamRandomPitch" id=11]
-audio_stream = ExtResource( 4 )
-
-[sub_resource type="AudioStreamRandomPitch" id=12]
-audio_stream = ExtResource( 6 )
-
-[sub_resource type="AudioStreamRandomPitch" id=13]
-audio_stream = ExtResource( 5 )
-
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 3 )
 dashSound = SubResource( 14 )
@@ -166,21 +154,5 @@ one_shot = true
 
 [node name="RollDelayTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="DashSFX" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource( 10 )
-bus = "Player SFX"
-
-[node name="RollSFX" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource( 11 )
-bus = "Player SFX"
-
-[node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource( 12 )
-bus = "Player SFX"
-
-[node name="RunSFX" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource( 13 )
-bus = "Player SFX"
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
