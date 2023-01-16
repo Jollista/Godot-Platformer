@@ -25,9 +25,16 @@ onready var sprite := $Sprite
 onready var anim := $AnimationPlayer
 onready var dashDelayTimer := $DashDelayTimer
 onready var rollDelayTimer := $RollDelayTimer
+onready var sfx := $SFX
 
 export var dashDelay: float = 0.5
 export var rollDelay: float = 0.3
+
+# exported random pitch audiostreams for player sfx
+export(AudioStreamRandomPitch) var dashSound
+export(AudioStreamRandomPitch) var rollSound
+export(AudioStreamRandomPitch) var jumpSound
+export(AudioStreamRandomPitch) var runSound
 
 func _input(event):
 	# do nothing if can't move
@@ -47,7 +54,8 @@ func _input(event):
 		dashDelayTimer.start(dashDelay)
 
 		# play sound effect
-		$DashSFX.play()
+		sfx.set_stream(dashSound)
+		sfx.play()
 
 		# get local mouse direction, calculate motion
 		var mouse_direction = get_local_mouse_position().normalized()
@@ -99,16 +107,18 @@ func _physics_process(delta):
 		facingRight = true
 		if is_on_floor(): # animate and play sfx
 			anim.play("Run")
-			if not $RunSFX.playing: 
-				$RunSFX.play()
+			if not (sfx.playing and sfx.stream == runSound):
+				sfx.set_stream(runSound)
+				sfx.play()
 	elif Input.is_action_pressed("left") and rollDelayTimer.is_stopped(): # input left and not rolling
 		# Decelerate and update facingRight
 		motion.x -= ACCELERATION
 		facingRight = false
 		if is_on_floor(): # animate and play sfx
 			anim.play("Run")
-			if not $RunSFX.playing: 
-				$RunSFX.play()
+			if not (sfx.playing and sfx.stream == runSound):
+				sfx.set_stream(runSound)
+				sfx.play()
 	
 	elif rollDelayTimer.is_stopped(): # slow down if not running and not rolling
 		motion.x = lerp(motion.x, 0, 0.2)
@@ -121,7 +131,8 @@ func _physics_process(delta):
 	
 	# handle rolling
 	elif Input.is_action_pressed("roll") and rollDelayTimer.is_stopped() and is_on_floor():
-		$RollSFX.play()
+		sfx.set_stream(rollSound)
+		sfx.play()
 		rollDelayTimer.start(rollDelay)
 		if facingRight:
 			motion.x = ROLL_SPEED
@@ -136,7 +147,8 @@ func _physics_process(delta):
 		falling = false
 		if Input.is_action_pressed("jump"): # jump and play sfx
 			motion.y = -JUMP_FORCE
-			$JumpSFX.play()
+			sfx.set_stream(jumpSound)
+			sfx.play()
 	else: # is in air, animate
 		if motion.y < 0:
 			anim.play("Jump")
