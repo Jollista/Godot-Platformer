@@ -35,6 +35,84 @@ margin_bottom = 68.0
 disabled = true
 text = "Quit"
 
+[node name="TextSpeedLabel" type="Label" parent="VBoxContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 86.0
+text = "Text Speed"
+align = 1
+
+[node name="SlowTextButton" type="Button" parent="VBoxContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 92.0
+rect_pivot_offset = Vector2( -840, -130 )
+text = "Slow"
+
+[node name="MedTextButton" type="Button" parent="VBoxContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 92.0
+text = "Normal"
+
+[node name="FastTextButton" type="Button" parent="VBoxContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 92.0
+text = "Fast"
+
+[node name="MasterVolumeLabel" type="Label" parent="VBoxContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 86.0
+text = "Master Volume"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="VBoxContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 88.0
+
+[node name="MusicVolumeLabel" type="Label" parent="VBoxContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 86.0
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="VBoxContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 88.0
+
+[node name="SFXVolumeLabel" type="Label" parent="VBoxContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 86.0
+text = "SFX Volume"
+
+[node name="SFXVolumeSlider" type="HSlider" parent="VBoxContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 88.0
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 92.0
+disabled = true
+text = "Back"
+
 [connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]

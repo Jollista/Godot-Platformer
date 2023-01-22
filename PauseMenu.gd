@@ -29,9 +29,51 @@ func _on_ResumeButton_pressed():
 	$"../Player".unfreeze()
 
 func _on_OptionsButton_pressed():
-	# Text speed (Slow, Med, Fast)
-	# Volume (master, music, sfx)
-	pass
+	toggleOptionsMenu()
+
+func toggleOptionsMenu():
+	var vis = $VBoxContainer/ResumeButton.visible
+	var disabled = $VBoxContainer/ResumeButton.disabled
+	
+	# set default menu buttons invisible/disabled
+	$VBoxContainer/ResumeButton.disabled = !disabled
+	$VBoxContainer/ResumeButton.visible = !vis
+	$VBoxContainer/OptionsButton.disabled = !disabled
+	$VBoxContainer/OptionsButton.visible = !vis
+	$VBoxContainer/QuitButton.disabled = !disabled
+	$VBoxContainer/QuitButton.visible = !vis
+	
+	# set options menu stuff visible/enabled
+	# text speeds
+	$VBoxContainer/TextSpeedLabel.visible = vis
+	$VBoxContainer/SlowTextButton.disabled = disabled
+	$VBoxContainer/SlowTextButton.visible = vis
+	$VBoxContainer/MedTextButton.disabled = disabled
+	$VBoxContainer/MedTextButton.visible = vis
+	$VBoxContainer/FastTextButton.disabled = disabled
+	$VBoxContainer/FastTextButton.visible = vis
+	
+	# volume
+	$VBoxContainer/MasterVolumeLabel.visible = vis
+	$VBoxContainer/MasterVolumeSlider.visible = vis
+	
+	$VBoxContainer/MusicVolumeLabel.visible = vis
+	$VBoxContainer/MusicVolumeSlider.visible = vis
+	
+	$VBoxContainer/SFXVolumeLabel.visible = vis
+	$VBoxContainer/SFXVolumeSlider.visible = vis
+	
+	$VBoxContainer/BackButton.disabled = disabled
+	$VBoxContainer/BackButton.visible = vis
+	
+	# grab focus
+	if vis: # options menu
+		$VBoxContainer/BackButton.grab_focus()
+	else: # default pause menu
+		$VBoxContainer/ResumeButton.grab_focus()
 
 func _on_QuitButton_pressed():
 	get_tree().quit()
+
+func _on_BackButton_pressed():
+	toggleOptionsMenu()
