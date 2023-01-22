@@ -1,0 +1,3 @@
+In PlayerController.gd, hasLanded will sometimes be set to true even if
+the player has not landed. Because of this, the player can sometimes dash
+twice without landing.

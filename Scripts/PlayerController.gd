@@ -45,8 +45,10 @@ func _input(event):
 	if is_on_floor():
 		hasLanded = true
 
-	# handle dash + associated animation
+	# handle dash + associated animation/sound
 	if event is InputEventMouseButton and dashDelayTimer.is_stopped() and hasLanded: # on click
+		print("dashing: " + String(hasLanded))
+		
 		# hasn't landed since dashing yet
 		hasLanded = false
 
