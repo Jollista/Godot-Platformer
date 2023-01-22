@@ -77,6 +77,8 @@ visible = false
 margin_top = 72.0
 margin_right = 256.0
 margin_bottom = 88.0
+max_value = 86.0
+value = 80.0
 
 [node name="MusicVolumeLabel" type="Label" parent="VBoxContainer"]
 visible = false
@@ -90,6 +92,8 @@ visible = false
 margin_top = 72.0
 margin_right = 256.0
 margin_bottom = 88.0
+max_value = 86.0
+value = 80.0
 
 [node name="SFXVolumeLabel" type="Label" parent="VBoxContainer"]
 visible = false
@@ -103,6 +107,8 @@ visible = false
 margin_top = 72.0
 margin_right = 256.0
 margin_bottom = 88.0
+max_value = 86.0
+value = 80.0
 
 [node name="BackButton" type="Button" parent="VBoxContainer"]
 visible = false
@@ -115,4 +121,10 @@ text = "Back"
 [connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/SlowTextButton" to="." method="_on_SlowTextButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/MedTextButton" to="." method="_on_MedTextButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/FastTextButton" to="." method="_on_FastTextButton_pressed"]
+[connection signal="value_changed" from="VBoxContainer/MasterVolumeSlider" to="." method="_on_MasterVolumeSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SFXVolumeSlider" to="." method="_on_SFXVolumeSlider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]

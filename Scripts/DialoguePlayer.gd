@@ -11,6 +11,7 @@ const DIALOGUE_DELAY = 0.1
 const FAST = 0.01
 const NORM = 0.025
 const SLOW = 0.05
+export var textSpeed = NORM
 
 # array of lines
 var dialogue = []
@@ -39,7 +40,7 @@ func startDialogue(filepath:String = ""):
 	dialogue = loadDialogue()
 	
 	# set wait time between displaying characters
-	$DialogueDelay.set_wait_time(FAST)
+	$DialogueDelay.set_wait_time(textSpeed)
 	# initial yield before it matters bc that one messes with 
 	# $DialogueBox/Chat.visible_characters for some reason
 	$DialogueDelay.start()

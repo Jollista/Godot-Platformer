@@ -77,3 +77,22 @@ func _on_QuitButton_pressed():
 
 func _on_BackButton_pressed():
 	toggleOptionsMenu()
+
+func _on_MasterVolumeSlider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value-80)
+
+func _on_MusicVolumeSlider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), value-80)
+
+func _on_SFXVolumeSlider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Player SFX"), value-80)
+
+
+func _on_SlowTextButton_pressed():
+	$"../DialogueCanvas".textSpeed = $"../DialogueCanvas".SLOW
+
+func _on_MedTextButton_pressed():
+	$"../DialogueCanvas".textSpeed = $"../DialogueCanvas".NORM
+
+func _on_FastTextButton_pressed():
+	$"../DialogueCanvas".textSpeed = $"../DialogueCanvas".FAST
