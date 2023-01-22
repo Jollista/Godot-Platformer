@@ -28,7 +28,7 @@ onready var rollDelayTimer := $RollDelayTimer
 onready var sfx := $SFX
 
 export var dashDelay: float = 0.5
-export var rollDelay: float = 0.3
+export var rollDelay: float = 0.7
 
 # exported random pitch audiostreams for player sfx
 export(AudioStreamRandomPitch) var dashSound
@@ -75,9 +75,6 @@ func _input(event):
 		# animate
 		anim.play("Dash")
 
-		# apply movement
-		#move_and_collide(motion)
-
 func _physics_process(delta):
 	# lock all movement if canMove == false
 	if !canMove:
@@ -88,6 +85,26 @@ func _physics_process(delta):
 		# apply movement and stop
 		motion = move_and_slide(motion, UP)
 		return
+	
+	# handle rolling
+	if Input.is_action_pressed("roll") and rollDelayTimer.is_stopped() and is_on_floor():
+		# play sfx
+		sfx.set_stream(rollSound)
+		sfx.play()
+		#play animation
+		anim.play("Roll")
+		
+		#start timer
+		rollDelayTimer.start(rollDelay)
+		
+		if facingRight:
+			motion.x = ROLL_SPEED
+		else:
+			motion.x = -ROLL_SPEED
+		motion = move_and_slide(motion, UP)
+		return
+	elif anim.current_animation != "Roll": # limit speed if not rolling
+		motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 	
 	# falling physics
 	motion.y += GRAVITY
@@ -101,7 +118,7 @@ func _physics_process(delta):
 		sprite.scale.x = -1
 
 	# horizontal movement
-	if Input.is_action_pressed("right") and rollDelayTimer.is_stopped(): # input right and not rolling
+	if Input.is_action_pressed("right") and anim.current_animation != "Roll": # input right and not rolling
 		# Accelerate and update facingRight
 		motion.x += ACCELERATION
 		facingRight = true
@@ -110,7 +127,7 @@ func _physics_process(delta):
 			if not (sfx.playing and sfx.stream == runSound):
 				sfx.set_stream(runSound)
 				sfx.play()
-	elif Input.is_action_pressed("left") and rollDelayTimer.is_stopped(): # input left and not rolling
+	elif Input.is_action_pressed("left") and anim.current_animation != "Roll": # input left and not rolling
 		# Decelerate and update facingRight
 		motion.x -= ACCELERATION
 		facingRight = false
@@ -120,27 +137,14 @@ func _physics_process(delta):
 				sfx.set_stream(runSound)
 				sfx.play()
 	
-	elif rollDelayTimer.is_stopped(): # slow down if not running and not rolling
+	elif anim.current_animation != "Roll": # slow down if not running and not rolling
 		motion.x = lerp(motion.x, 0, 0.2)
 		if is_on_floor():
 			anim.play("Idle")
 	
 	# limit speed if sneaking
-	if Input.is_action_pressed("sneak"):
+	if Input.is_action_pressed("sneak") and anim.current_animation != "Roll":
 		motion.x = clamp(motion.x, -MAX_SPEED/3, MAX_SPEED/3)
-	
-	# handle rolling
-	elif Input.is_action_pressed("roll") and rollDelayTimer.is_stopped() and is_on_floor():
-		sfx.set_stream(rollSound)
-		sfx.play()
-		rollDelayTimer.start(rollDelay)
-		if facingRight:
-			motion.x = ROLL_SPEED
-		else:
-			motion.x = -ROLL_SPEED
-		anim.play("Roll")
-	elif rollDelayTimer.is_stopped(): # limit speed if not rolling
-		motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 	
 	# jumping
 	if is_on_floor(): # can only jump if on floor
