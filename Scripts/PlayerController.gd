@@ -165,8 +165,14 @@ func _physics_process(delta):
 	# apply movement
 	motion = move_and_slide(motion, UP)
 
-func freeze(playIdle:bool = true):
-	anim.play("Idle")
+func freeze(playIdle:bool = false):
+	if playIdle:
+		anim.play("Idle")
 	canMove = false
 func unfreeze():
 	canMove = true
+func toggleMovement():
+	if canMove:
+		freeze()
+	else:
+		unfreeze()
