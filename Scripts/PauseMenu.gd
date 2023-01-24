@@ -19,14 +19,22 @@ func _ready():
 
 func _input(event):
 	if Input.is_action_just_pressed("pause"):
+		# toggle menu visibility/interactability
 		visible = !visible
 		toggle = !$VBoxContainer/ResumeButton.disabled
 		$VBoxContainer/ResumeButton.disabled = toggle
 		$VBoxContainer/OptionsButton.disabled = toggle
 		$VBoxContainer/QuitButton.disabled = toggle
-		if !toggle:
+		
+		# grabfocus if menu is visible
+		if visible:
 			$VBoxContainer/ResumeButton.grab_focus()
+		
+		# toggle player movement
 		$"../Player".toggleMovement()
+		
+		# apply filter to sound effects
+		AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("Master"), 3, visible)	# low pass
 
 func _on_ResumeButton_pressed():
 	visible = false
