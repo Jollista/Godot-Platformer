@@ -1,9 +1,11 @@
 extends CanvasLayer
 
+# text speeds
+const FAST = 0.01
+const NORM = 0.025
+const SLOW = 0.05
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+# variable used to toggle visibility/interactability across the board
 var toggle = false
 
 # reference to settings.JSON file which contains the settings
@@ -16,6 +18,11 @@ func _ready():
 	if file.file_exists("res://settings.json"):
 		file.open("res://settings.json", file.READ)
 		settingsJSON = parse_json(file.get_as_text())
+	
+	# initialize volume sliders
+	$VBoxContainer/MasterVolumeSlider.value = settingsJSON[0]["MasterVol"]+80
+	$VBoxContainer/MusicVolumeSlider.value = settingsJSON[0]["MusicVol"]+80
+	$VBoxContainer/SFXVolumeSlider.value = settingsJSON[0]["SFXVol"]+80
 
 func _input(event):
 	if Input.is_action_just_pressed("pause"):
@@ -111,12 +118,12 @@ func _on_SFXVolumeSlider_value_changed(value):
 
 func _on_SlowTextButton_pressed():
 	$"../DialogueCanvas".textSpeed = $"../DialogueCanvas".SLOW
-	settingsJSON[0]["TextSpeed"] = "SLOW"
+	settingsJSON[0]["TextSpeed"] = SLOW
 
 func _on_MedTextButton_pressed():
 	$"../DialogueCanvas".textSpeed = $"../DialogueCanvas".NORM
-	settingsJSON[0]["TextSpeed"] = "NORM"
+	settingsJSON[0]["TextSpeed"] = NORM
 
 func _on_FastTextButton_pressed():
 	$"../DialogueCanvas".textSpeed = $"../DialogueCanvas".FAST
-	settingsJSON[0]["TextSpeed"] = "FAST"
+	settingsJSON[0]["TextSpeed"] = FAST

@@ -7,6 +7,7 @@ export(String, FILE, "*.json") var dialogueFile
 
 # delay between ending one dialogue and starting a new one
 const DIALOGUE_DELAY = 0.1
+
 # text speeds
 const FAST = 0.01
 const NORM = 0.025
@@ -27,6 +28,14 @@ var f = File.new()
 func _ready():
 	$Indicator/AnimationPlayer.play("Bob")
 	visible = false
+	
+	# read from settings.json
+	var file = File.new()
+	if file.file_exists("res://settings.json"):
+		file.open("res://settings.json", file.READ)
+		var settingsJSON = parse_json(file.get_as_text())
+		textSpeed = settingsJSON[0]["TextSpeed"]
+	print(textSpeed)
 
 func startDialogue(filepath:String = ""):
 	if !$DialogueDelay.is_stopped():

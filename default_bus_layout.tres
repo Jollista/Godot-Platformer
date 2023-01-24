@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=14 format=2]
+[gd_resource type="AudioBusLayout" load_steps=13 format=2]
 
 [sub_resource type="AudioEffectHighPassFilter" id=2]
 resource_name = "HighPassFilter"
@@ -8,9 +8,6 @@ resource_name = "Distortion"
 
 [sub_resource type="AudioEffectAmplify" id=4]
 resource_name = "Amplify"
-
-[sub_resource type="AudioEffectLowPassFilter" id=5]
-resource_name = "LowPassFilter"
 
 [sub_resource type="AudioEffectCompressor" id=9]
 resource_name = "Compressor"
@@ -46,14 +43,12 @@ bus/0/effect/1/effect = SubResource( 3 )
 bus/0/effect/1/enabled = false
 bus/0/effect/2/effect = SubResource( 4 )
 bus/0/effect/2/enabled = false
-bus/0/effect/3/effect = SubResource( 5 )
+bus/0/effect/3/effect = SubResource( 9 )
 bus/0/effect/3/enabled = false
-bus/0/effect/4/effect = SubResource( 9 )
+bus/0/effect/4/effect = SubResource( 10 )
 bus/0/effect/4/enabled = false
-bus/0/effect/5/effect = SubResource( 10 )
+bus/0/effect/5/effect = SubResource( 11 )
 bus/0/effect/5/enabled = false
-bus/0/effect/6/effect = SubResource( 11 )
-bus/0/effect/6/enabled = false
 bus/1/name = "Player SFX"
 bus/1/solo = false
 bus/1/mute = false
