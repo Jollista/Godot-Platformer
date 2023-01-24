@@ -16,13 +16,18 @@ The rest of the art used was made by me using pico8 and Pixlr E
 
 ### Audio
 #### Sound Effects
-Made by me, recorded with Audacity
+Made by me with Pico8 or recorded with Audacity
 
 #### Music
 The following music was used for this media project:
 <br>Music: Rhinoceros by Kevin MacLeod
 <br>Free download: https://filmmusic.io/song/4284-rhinoceros
 <br>License (CC BY 4.0): https://filmmusic.io/standard-license
+<br>Changes made: phaser effect
+
+<br>Music: Impact Prelude by Kevin MacLeod
+<br>Free download: https://freemusicarchive.org/music/Kevin_MacLeod/Impact
+<br>License (CC BY 4.0): https://creativecommons.org/licenses/by/3.0/
 <br>Changes made: phaser effect
 
 <!--
