@@ -1,3 +1,8 @@
+# TO DO:
+# - Make options menu actually edit the json by writing to file, ya goof
+# - make OptionsMenuPopup its own scene and have it replace PauseMenu's version
+#	of the options menu. I don't wanna have to edit shit twice.
+
 extends WindowDialog
 
 # text speeds
@@ -7,12 +12,14 @@ const SLOW = 0.05
 
 # reference to settings.JSON file which contains the settings
 var settingsJSON
+# file variable for settings.JSON management
+var file = File.new()
 
 func _ready():
-	var file = File.new()
 	if file.file_exists("res://settings.json"):
 		file.open("res://settings.json", file.READ)
 		settingsJSON = parse_json(file.get_as_text())
+		file.close()
 	
 	# initialize volume sliders
 	$MasterVolumeLabel/MasterVolumeSlider.value = settingsJSON[0]["MasterVol"]+80
