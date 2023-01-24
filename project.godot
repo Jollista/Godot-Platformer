@@ -11,12 +11,16 @@ config_version=4
 [application]
 
 config/name="Katana 0 Replication Test"
-run/main_scene="res://PlatformerSceneTest.tscn"
+run/main_scene="res://StartMenu.tscn"
 config/icon="res://Sprites/icon.png"
 
 [display]
 
 mouse_cursor/custom_image="res://Sprites/crosshair2.png"
+
+[global]
+
+scene=false
 
 [gui]
 

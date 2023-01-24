@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/01 Kevin MacLeod - Impact Prelude.mp3-d31cba951a2eacafd77f087e6057e384.mp3str"
+
+[deps]
+
+source_file="res://Sounds/01 Kevin MacLeod - Impact Prelude.mp3"
+dest_files=[ "res://.import/01 Kevin MacLeod - Impact Prelude.mp3-d31cba951a2eacafd77f087e6057e384.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
