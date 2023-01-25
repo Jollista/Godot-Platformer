@@ -14,6 +14,8 @@ const SLOW = 0.05
 var settingsJSON
 # file variable for settings.JSON management
 var file = File.new()
+# used to help determine when window is closed
+var lastVisCheck
 
 func _ready():
 	if file.file_exists("res://settings.json"):
@@ -25,6 +27,16 @@ func _ready():
 	$MasterVolumeLabel/MasterVolumeSlider.value = settingsJSON[0]["MasterVol"]+80
 	$MusicVolumeLabel/MusicVolumeSlider.value = settingsJSON[0]["MusicVol"]+80
 	$SFXVolumeLabel/SFXVolumeSlider.value = settingsJSON[0]["SFXVol"]+80
+
+func _input(event):
+	if (!visible and lastVisCheck):
+		# window has been closed
+		if file.file_exists("res://settings.json"):
+			file.open("res://settings.json", file.WRITE)
+			file.store_line(to_json(settingsJSON))
+			file.close()
+		print(String(settingsJSON))
+	lastVisCheck = visible
 
 func _on_MasterVolumeSlider_value_changed(value):
 	# change volume and update settings json
