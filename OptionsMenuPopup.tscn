@@ -1,0 +1,93 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/OptionsMenuPopup.gd" type="Script" id=1]
+
+[node name="OptionsMenuPopup" type="WindowDialog"]
+margin_left = 256.0
+margin_top = 128.0
+margin_right = 768.0
+margin_bottom = 472.0
+popup_exclusive = true
+script = ExtResource( 1 )
+
+[node name="TextSpeedLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -35.0
+margin_top = 10.0
+margin_right = 35.0
+margin_bottom = 24.0
+text = "Text Speed"
+
+[node name="SlowTextButton" type="Button" parent="TextSpeedLabel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -208.0
+margin_top = 38.0
+margin_right = -96.0
+margin_bottom = 58.0
+text = "Slow"
+
+[node name="NormTextButton" type="Button" parent="TextSpeedLabel"]
+margin_left = -21.0
+margin_top = 38.0
+margin_right = 91.0
+margin_bottom = 58.0
+text = "Normal"
+
+[node name="FastTextButton" type="Button" parent="TextSpeedLabel"]
+margin_left = 131.0
+margin_top = 38.0
+margin_right = 243.0
+margin_bottom = 58.0
+text = "Fast"
+
+[node name="MasterVolumeLabel" type="Label" parent="."]
+margin_top = 128.0
+margin_right = 97.0
+margin_bottom = 142.0
+rect_pivot_offset = Vector2( -176, -24 )
+text = "Master Volume"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="MasterVolumeLabel"]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 496.0
+margin_bottom = 48.0
+max_value = 86.0
+value = 80.0
+
+[node name="MusicVolumeLabel" type="Label" parent="."]
+margin_top = 192.0
+margin_right = 97.0
+margin_bottom = 206.0
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="MusicVolumeLabel"]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 496.0
+margin_bottom = 48.0
+max_value = 86.0
+value = 80.0
+
+[node name="SFXVolumeLabel" type="Label" parent="."]
+margin_top = 256.0
+margin_right = 97.0
+margin_bottom = 270.0
+text = "SFX Volume"
+
+[node name="SFXVolumeSlider" type="HSlider" parent="SFXVolumeLabel"]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 496.0
+margin_bottom = 48.0
+max_value = 86.0
+value = 80.0
+
+[connection signal="pressed" from="TextSpeedLabel/SlowTextButton" to="." method="_on_SlowTextButton_pressed"]
+[connection signal="pressed" from="TextSpeedLabel/NormTextButton" to="." method="_on_NormTextButton_pressed"]
+[connection signal="pressed" from="TextSpeedLabel/FastTextButton" to="." method="_on_FastTextButton_pressed"]
+[connection signal="value_changed" from="MasterVolumeLabel/MasterVolumeSlider" to="." method="_on_MasterVolumeSlider_value_changed"]
+[connection signal="value_changed" from="MusicVolumeLabel/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_value_changed"]
+[connection signal="value_changed" from="SFXVolumeLabel/SFXVolumeSlider" to="." method="_on_SFXVolumeSlider_value_changed"]

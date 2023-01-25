@@ -1,5 +1,4 @@
 # TO DO:
-# - Make options menu actually edit the json by writing to file, ya goof
 # - make OptionsMenuPopup its own scene and have it replace PauseMenu's version
 #	of the options menu. I don't wanna have to edit shit twice.
 

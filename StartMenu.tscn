@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/StartMenu.gd" type="Script" id=1]
 [ext_resource path="res://Sounds/01 Kevin MacLeod - Impact Prelude.mp3" type="AudioStream" id=2]
-[ext_resource path="res://Scripts/OptionsMenuPopup.gd" type="Script" id=3]
+[ext_resource path="res://OptionsMenuPopup.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/swordguy.png" type="Texture" id=4]
 
 [node name="Control" type="Control"]
@@ -36,88 +36,8 @@ margin_right = 192.0
 margin_bottom = 68.0
 text = "Quit"
 
-[node name="OptionsMenuPopup" type="WindowDialog" parent="."]
-margin_left = 256.0
-margin_top = 128.0
-margin_right = 768.0
-margin_bottom = 472.0
-popup_exclusive = true
-script = ExtResource( 3 )
-
-[node name="TextSpeedLabel" type="Label" parent="OptionsMenuPopup"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -35.0
-margin_top = 10.0
-margin_right = 35.0
-margin_bottom = 24.0
-text = "Text Speed"
-
-[node name="SlowTextButton" type="Button" parent="OptionsMenuPopup/TextSpeedLabel"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -208.0
-margin_top = 38.0
-margin_right = -96.0
-margin_bottom = 58.0
-text = "Slow"
-
-[node name="NormTextButton" type="Button" parent="OptionsMenuPopup/TextSpeedLabel"]
-margin_left = -21.0
-margin_top = 38.0
-margin_right = 91.0
-margin_bottom = 58.0
-text = "Normal"
-
-[node name="FastTextButton" type="Button" parent="OptionsMenuPopup/TextSpeedLabel"]
-margin_left = 131.0
-margin_top = 38.0
-margin_right = 243.0
-margin_bottom = 58.0
-text = "Fast"
-
-[node name="MasterVolumeLabel" type="Label" parent="OptionsMenuPopup"]
-margin_top = 128.0
-margin_right = 97.0
-margin_bottom = 142.0
-rect_pivot_offset = Vector2( -176, -24 )
-text = "Master Volume"
-
-[node name="MasterVolumeSlider" type="HSlider" parent="OptionsMenuPopup/MasterVolumeLabel"]
-margin_left = 16.0
-margin_top = 24.0
-margin_right = 496.0
-margin_bottom = 48.0
-max_value = 86.0
-value = 80.0
-
-[node name="MusicVolumeLabel" type="Label" parent="OptionsMenuPopup"]
-margin_top = 192.0
-margin_right = 97.0
-margin_bottom = 206.0
-text = "Music Volume"
-
-[node name="MusicVolumeSlider" type="HSlider" parent="OptionsMenuPopup/MusicVolumeLabel"]
-margin_left = 16.0
-margin_top = 24.0
-margin_right = 496.0
-margin_bottom = 48.0
-max_value = 86.0
-value = 80.0
-
-[node name="SFXVolumeLabel" type="Label" parent="OptionsMenuPopup"]
-margin_top = 256.0
-margin_right = 97.0
-margin_bottom = 270.0
-text = "SFX Volume"
-
-[node name="SFXVolumeSlider" type="HSlider" parent="OptionsMenuPopup/SFXVolumeLabel"]
-margin_left = 16.0
-margin_top = 24.0
-margin_right = 496.0
-margin_bottom = 48.0
-max_value = 86.0
-value = 80.0
+[node name="OptionsMenuPopup" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
@@ -127,9 +47,3 @@ bus = "Music"
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
-[connection signal="pressed" from="OptionsMenuPopup/TextSpeedLabel/SlowTextButton" to="OptionsMenuPopup" method="_on_SlowTextButton_pressed"]
-[connection signal="pressed" from="OptionsMenuPopup/TextSpeedLabel/NormTextButton" to="OptionsMenuPopup" method="_on_NormTextButton_pressed"]
-[connection signal="pressed" from="OptionsMenuPopup/TextSpeedLabel/FastTextButton" to="OptionsMenuPopup" method="_on_FastTextButton_pressed"]
-[connection signal="value_changed" from="OptionsMenuPopup/MasterVolumeLabel/MasterVolumeSlider" to="OptionsMenuPopup" method="_on_MasterVolumeSlider_value_changed"]
-[connection signal="value_changed" from="OptionsMenuPopup/MusicVolumeLabel/MusicVolumeSlider" to="OptionsMenuPopup" method="_on_MusicVolumeSlider_value_changed"]
-[connection signal="value_changed" from="OptionsMenuPopup/SFXVolumeLabel/SFXVolumeSlider" to="OptionsMenuPopup" method="_on_SFXVolumeSlider_value_changed"]
