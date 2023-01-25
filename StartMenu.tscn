@@ -37,7 +37,6 @@ margin_bottom = 68.0
 text = "Quit"
 
 [node name="OptionsMenuPopup" parent="." instance=ExtResource( 3 )]
-visible = false
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
