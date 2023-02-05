@@ -69,10 +69,10 @@ func _input(event):
 		# used for animation facing
 		if mouse_direction.x > sprite.position.x: # dashing right
 			facingRight = true
-			sprite.scale.x = 1
-		elif mouse_direction.x < sprite.position.y: # dashing left
+			sprite.flip_h = !facingRight
+		elif mouse_direction.x < sprite.position.x: # dashing left
 			facingRight = false
-			sprite.scale.x = -1
+			sprite.flip_h = !facingRight
 
 		# animate
 		anim.play("Dash")
@@ -114,10 +114,7 @@ func _physics_process(delta):
 		motion.y = MAX_FALL_SPEED
 
 	# used for animation facing
-	if facingRight == true:
-		sprite.scale.x = 1
-	else:
-		sprite.scale.x = -1
+	sprite.flip_h = !facingRight
 
 	# horizontal movement
 	if Input.is_action_pressed("right") and anim.current_animation != "Roll": # input right and not rolling

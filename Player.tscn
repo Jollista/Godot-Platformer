@@ -1,10 +1,10 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Sounds/woosh2.wav" type="AudioStream" id=1]
-[ext_resource path="res://Sprites/viking2.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/wiz spritesheet v2.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=3]
-[ext_resource path="res://Sounds/rollNoise.mp3" type="AudioStream" id=4]
-[ext_resource path="res://Sounds/walkNoise.mp3" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/wubwub.wav" type="AudioStream" id=4]
+[ext_resource path="res://Sounds/cutewoosh.wav" type="AudioStream" id=5]
 [ext_resource path="res://Sounds/jumpNoise.mp3" type="AudioStream" id=6]
 [ext_resource path="res://Animations/Idle.tres" type="Animation" id=7]
 
@@ -12,16 +12,16 @@
 audio_stream = ExtResource( 1 )
 
 [sub_resource type="AudioStreamRandomPitch" id=15]
-audio_stream = ExtResource( 4 )
+audio_stream = ExtResource( 5 )
 
 [sub_resource type="AudioStreamRandomPitch" id=16]
 audio_stream = ExtResource( 6 )
 
 [sub_resource type="AudioStreamRandomPitch" id=17]
-audio_stream = ExtResource( 5 )
+audio_stream = ExtResource( 4 )
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 9.5 )
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 8, 8 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Dash"
@@ -33,10 +33,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 34, 35, 36 ]
+"values": [ 16, 17 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -49,15 +49,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 20, 21, 22 ]
+"values": [ 22, 23 ]
 }
 
 [sub_resource type="Animation" id=5]
 resource_name = "Jump"
-length = 2.0
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -65,10 +65,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 18, 19 ]
+"values": [ 19, 20, 21 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -99,12 +99,12 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 29, 30, 31, 32 ]
+"values": [ 24, 25, 26, 27 ]
 }
 
 [sub_resource type="Animation" id=7]
 resource_name = "Run"
-length = 0.6
+length = 0.7
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -113,10 +113,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 9, 10, 11, 12, 13, 14 ]
+"values": [ 8, 9, 10, 11, 12, 13, 15 ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -131,13 +131,14 @@ jumpSound = SubResource( 16 )
 runSound = SubResource( 17 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 2.38419e-07, 0 )
+scale = Vector2( 0.326531, 0.290909 )
 texture = ExtResource( 2 )
-hframes = 9
-vframes = 6
+hframes = 8
+vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 3, 6.5 )
-shape = SubResource( 1 )
+shape = SubResource( 18 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Dash = SubResource( 2 )

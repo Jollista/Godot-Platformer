@@ -14,9 +14,6 @@
 position = Vector2( -120, -16 )
 dialogPath = "res://DialogueJSONs/dialogueExample.json"
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -3, -94 )
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
@@ -42,3 +39,6 @@ bus = "Music"
 [node name="DialogueCanvas" parent="." instance=ExtResource( 5 )]
 
 [node name="MenuCanvas" parent="." instance=ExtResource( 7 )]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -88 )

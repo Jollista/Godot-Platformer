@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/NPCController.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Idle.tres" type="Animation" id=2]
@@ -7,6 +7,21 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 9.5 )
 
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
 [node name="NPC" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -14,7 +29,6 @@ script = ExtResource( 1 )
 texture = ExtResource( 3 )
 hframes = 9
 vframes = 6
-frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 3, 6.5 )
@@ -23,3 +37,4 @@ disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = ExtResource( 2 )
+anims/RESET = SubResource( 2 )
