@@ -8,7 +8,7 @@ export var dialogPath = ""
 onready var player := $"../Player"
 
 func _ready():
-	$AnimationPlayer.play("Idle")
+	$AnimationPlayer.play("Viking_Idle")
 
 func _process(delta):
 	# distance formula -> √((x2 – x1)² + (y2 – y1)²)

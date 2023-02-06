@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/NPCController.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Idle.tres" type="Animation" id=2]
@@ -22,6 +22,23 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
+[sub_resource type="Animation" id=3]
+resource_name = "Viking_Idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 6 ]
+}
+
 [node name="NPC" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -38,3 +55,4 @@ disabled = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = ExtResource( 2 )
 anims/RESET = SubResource( 2 )
+anims/Viking_Idle = SubResource( 3 )
