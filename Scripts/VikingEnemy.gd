@@ -6,7 +6,7 @@ const DISTANCE = 200
 
 onready var player := $"../Player"
 
-func _process(delta):	
+func _process(delta):
 	if canSee(player):
 		approach(player)
 	else:
@@ -40,6 +40,7 @@ func approach(target):
 
 # default behavior when enemy is not in sight
 func patrol():
+	$AnimationPlayer.play("Idle")
 	if $Timer.is_stopped():
 		$Timer.start()
 		turnAround()
@@ -47,3 +48,10 @@ func patrol():
 func turnAround():
 	facingRight = !facingRight
 	$Sprite.flip_h = !facingRight
+
+func die():
+	$AnimationPlayer.play("Death")
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "Death":
+		queue_free()
