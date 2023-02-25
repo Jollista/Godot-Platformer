@@ -67,12 +67,7 @@ func _input(event):
 		var t = get_physics_process_delta_time()
 
 		# used for animation facing
-		if mouse_direction.x > sprite.position.x: # dashing right
-			facingRight = true
-			sprite.flip_h = !facingRight
-		elif mouse_direction.x < sprite.position.x: # dashing left
-			facingRight = false
-			sprite.flip_h = !facingRight
+		updateFacing(mouse_direction.x)
 
 		# animate
 		anim.play("Dash")
@@ -173,3 +168,11 @@ func toggleMovement():
 		freeze()
 	else:
 		unfreeze()
+
+func updateFacing(mouseDirX):
+	if mouseDirX > sprite.position.x: # dashing right
+		facingRight = true
+		sprite.flip_h = !facingRight
+	elif mouseDirX < sprite.position.x: # dashing left
+		facingRight = false
+		sprite.flip_h = !facingRight
